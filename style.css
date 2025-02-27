@@ -1,227 +1,220 @@
-@charset "UTF-8";
-
+/* Estilos gerais */
 * {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     box-sizing: border-box;
+    color: rgb(214, 214, 214);
 }
 
-/* ELEMENTOS DA INTERFACE */
-
+.top-image {
+    width: 10%; /* Isso redimensiona a imagem para ocupar toda a largura disponível */
+    height: auto; /* Mantém a proporção da imagem */
+}
 body {
-    background-color: #15142b;
-    background-image: linear-gradient(180deg, #372991, #15142b);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    background-attachment: fixed;
-
+    background-color: #ffffff;
     display: flex;
     flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: center;
     align-items: center;
-}
-
-header, main, section, article {
-    max-width: 700px;
-}
-
-header > h1 {
-    color: white;
-    text-shadow: 3px 3px 0px black;
-}
-
-main, section, article {
-    background-color: white;
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.502);
-}
-
-footer {
-    display: block;
-    width: 100vw;
-    background-color: #291f6c;
-    color: white;
-    text-align: center;
-    margin-top: auto;
-    padding: 5px;
-}
-
-p {
-    text-align: justify;
-    line-height: 1.5em;
-}
-
-h2, h3, h4 {
-    color: #372991;
-    margin: 0 0 10px 0;
-}
-
-a {
-    color: #15142b;
-    background-color: rgba(55, 41, 145, 0.1);
-    padding: 0 3px;
-    font-weight: 600;
-    text-decoration: none;
-    border-bottom: .5px dotted #372991;
-}
-
-a:hover {
-    color: #372991;
-    border-bottom: 1px solid #372991;
-}
-
-/* TABELAS E LISTAS */
-
-table {
-    min-width: 400px;
-    border-spacing: 0px;
-    border: 0.5px solid #372991;
-    margin: 10px auto;
-}
-
-table th {
-    background-color: #372991;
-    color: white;
-    padding: 5px;
-    text-align: left;
-}
-
-table td {
-    padding: 5px;
-}
-
-table tr {
-    background-color: rgba(55, 41, 145, 0.05);
-}
-
-table tr:nth-child(odd) {
-    background-color: rgba(55, 41, 145, 0.3);
-}
-
-table.divisao {
-    border: 1px solid white;
-}
-
-table.divisao td {
-    background-color: white;
+    justify-content: center;
+    min-height: 100vh;
     padding: 20px;
-    text-align: center;
-    font-size: 2.5em;
 }
 
-table.divisao  tr:nth-child(1) td:nth-child(2) {
-    border-bottom: 3px solid black;
-    border-left: 3px solid black;
-}
-
-table.divisao tr:nth-child(2) td:nth-child(2) {
-    border-left: 3px solid black;
-}
-
-table.divisao tr:nth-child(2) td:nth-child(1) {
-    text-decoration: underline;
-}
-
-ul > li::marker {
-    color: #372991;
-}
-
-/* ELEMENTOS DE FORMULÁRIO */
-
+/* Formulário */
 form {
-    background-color: rgba(55, 41, 145, 0.2);
-    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 20px;
     border-radius: 10px;
+    width: 90%;
+    max-width: 1000px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-form label {
+/* Divs organizadas para dados pessoais, contato, etc. */
+.form-group_pessoal,
+.form-group_contato,
+.form-group_endereco,
+.form-group_profissao,
+.form-group_nome_do_conjunge,
+.form-group_dependente1,
+.form-group_rhema,
+.form-group_datadoNascimento,
+.form-group_instagram,
+.form-group_observacoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+}
+
+.form-group_pessoal label,
+.form-group_contato label,
+.form-group_endereco label,
+.form-group_profissao label,
+.form-group_nome_do_conjunge label,
+.form-group_dependente1 label,
+.form-group_rhema label,
+.form-group_datadoNascimento label,
+.form-group_instagram label,
+.form-group_observacoes label {
+    width: 100%;
+}
+
+.form-group_pessoal input,
+.form-group_contato input,
+.form-group_endereco input,
+.form-group_profissao input,
+.form-group_nome_do_conjunge input,
+.form-group_dependente1 input,
+.form-group_rhema input,
+.form-group_datadoNascimento input,
+.form-group_instagram input,
+.form-group_observacoes input {
+    width: 48%; /* Deixa os campos lado a lado */
+}
+
+.form-group_pessoal input:last-child,
+.form-group_contato input:last-child,
+.form-group_endereco input:last-child,
+.form-group_profissao input:last-child,
+.form-group_nome_do_conjunge input:last-child,
+.form-group_dependente1 input:last-child,
+.form-group_rhema input:last-child,
+.form-group_datadoNascimento input:last-child,
+.form-group_instagram input:last-child {
+    width: 100%; /* Quebra a linha no último campo para dar espaçamento */
+}
+
+label {
     display: block;
-    width: fit-content;
-    font-size: 0.8em;
-    font-weight: 100;
-    background-color: rgba(55, 41, 145, 0.2);
-    padding: 3px 7px;
+    font-size: 14px;
     margin-top: 10px;
-    margin-bottom: 0px;
+    color: #8f8d8d;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    background-color: transparent;
+    border: 1px solid #b1aeae;
     border-radius: 5px;
+    color: rgb(163, 163, 163);
+    font-size: 16px;
 }
 
-input[type=text], [type=number], select, input[type=date], input[type=date], input[type=datetime], input[type=email], input[type=month], input[type=password], input[type=range], input[type=tel], input[type=time], input[type=week] {
-    width: 100%;
-    padding: 12px 20px;
-    font-size: 1em;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+input:focus, select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
-  
-input[type=submit] {
-    width: 100%;
-    background-color: #4CAF50;
-    font-size: 1em;
-    color: white;
-    padding: 10px 20px;
-    margin: 5px 0;
+
+/* Seção separada por linhas */
+form > label {
+    margin-top: 30px;
+    border-top: 1px solid #ddd;
+    padding-top: 15px;
+    font-size: 16px;
+    color: #007bff;
+}
+
+/* Botões */
+button, input[type=submit] {
+    background-color: #007bff;
+    color: rgb(4, 21, 255);
     border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-  
-input[type=submit]:hover {
-    background-color: #45a049;
-}
-
-input[type=reset] {
+    padding: 10px;
     width: 100%;
-    background-color: #eb9903;
-    font-size: 1em;
-    color: white;
-    padding: 10px 20px;
-    margin: 5px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-input[type=reset]:hover {
-    background-color: #c27013;
-}
-
-input[type=button], button {
-    width: 100%;
-    background-color: #372991;
-    font-size: 1em;
-    color: white;
-    padding: 10px 20px;
-    margin: 5px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-input[type=button]:hover, button:hover {
-    background-color: #291f6c;
-}
-
-fieldset {
-    border: 0.5px dotted #372991;
-}
-
-fieldset > legend {
-    font-size: 0.8em;
-    font-weight: 100;
-    background-color: rgba(55, 41, 145, 0.2);
-    padding: 3px 7px;
+    margin-top: 15px;
     border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
 }
 
-input[type=radio] + label, input[type=checkbox] + label {
-    display: inline-block;
-    font-size: 1em;
-    background-color: rgba(0, 0, 0, 0);
+button:hover, input[type=submit]:hover {
+    background-color: #0056b3;
+}
+
+/* Checkbox e Radio */
+.checkbox-group, .radio-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.checkbox-group input, .radio-group input {
+    width: auto;
+}
+
+/* Responsividade para telas pequenas */
+@media (max-width: 600px) {
+    form {
+        width: 100%;
+    }
+
+    .form-group_pessoal input,
+    .form-group_contato input,
+    .form-group_endereco input,
+    .form-group_profissao input,
+    .form-group_nome_do_conjunge input,
+    .form-group_dependente1 input,
+    .form-group_rhema input,
+    .form-group_datadoNascimento input,
+    .form-group_instagram input,
+    .form-group_observacoes input {
+        width: 100%; /* Em telas pequenas, os campos ocupam toda a largura */
+    }
+}
+
+/* Ajustes para impressão */
+@media print {
+    body {
+        width: 100%;
+        font-size: 12px;
+        padding: 20px;
+    }
+
+    form {
+        display: block;
+        width: 100%;
+        box-shadow: none;
+        background-color: transparent;
+        padding: 0;
+    }
+
+    .form-group {
+        width: 48%;
+        display: inline-block;
+        margin-right: 2%; /* Espaço entre os campos */
+        margin-bottom: 10px;
+    }
+
+    /* Ajusta os campos para ocupar a página inteira */
+    .form-group:last-child {
+        margin-right: 0;
+    }
+
+    label {
+        margin-top: 5px;
+    }
+
+    input, select {
+        padding: 5px;
+        font-size: 12px;
+    }
+
+    /* Tamanho da imagem */
+    .input_form {
+        display: none;
+    }
+
+    /* Ajusta o espaçamento do formulário para impressão */
+    .form-group input, .form-group select {
+        font-size: 12px;
+    }
+
+   
 }
