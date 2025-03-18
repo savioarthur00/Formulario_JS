@@ -1,207 +1,134 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-   
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulário de Membros</title>
+    <title>Formulário de Funcionários</title>
     <style>
         label, select, input {
             margin: 10px;
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <img src="logo-azul-vertical.png" alt="Imagem no topo" class="top-image">
 
-    <h1>FORMULÁRIO DE ATUALIZAÇÃO CADASTRAL</h1>
-    <input type="file" id="fileInput" onchange="carregarPlanilha(event)" class="input_form"><br><br>
+    <h1>Selecione um Funcionário</h1>
+
     <!-- Formulário -->
     <form id="funcionarioForm">
+        <label for="nome">Nome:</label>
+        <select id="nome" onchange="preencherCampos()">
+            <option value="">Escolha um nome</option>
+        </select><br>
 
+        <label for="telefone">Telefone:</label>
+        <input type="text" id="telefone" disabled><br>
 
+        <label for="cidade">Cidade:</label>
+        <input type="text" id="cidade" disabled><br>
 
-        <label for="assunto">Dados pessoais: </label>
+        <label for="genero">Gênero:</label>
+        <input type="text" id="genero" disabled><br>
 
-        <div class="form-group_pessoal">
-            <label for="nome">Nome:</label>
-            <select id="nome" onchange="preencherCampos()">
-                <option value="">Escolha um nome</option>
-            </select>
-        </div>
+        <label for="data_nascimento">Data de Nascimento:</label>
+        <input type="text" id="data_nascimento" disabled><br>
 
-        <div class="form-group_pessoal">
-            <label for="cpf">CPF:</label>
-            <input type="text" id="cpf" disabled>
-        
-       
-            <label for="rg">RG:</label>
-            <input type="text" id="rg" disabled>
-        
-       
-            <label for="rg">UF:</label>
-            <input type="text" id="rg" disabled>
-        
-       
-            <label for="naturalidade">Naturalidade:</label>
-            <input type="text" id="naturalidade" disabled>
-        
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" disabled><br>
 
-        
-            <label for="nacionalidade">Nacionalidade:</label>
-            <input type="text" id="nacionalidade" disabled>
-       
-        
-            <label for="genero">Gênero:</label>
-            <input type="text" id="genero" disabled>
-      
-        
-       
-            <label for="data_nascimento">Data de Nascimento:</label>
-            <input type="text" id="data_nascimento" disabled>
-        
+        <label for="empresario">É Empresário?</label>
+        <input type="text" id="empresario" disabled><br>
 
-        
-            <label for="estado_civil">Estado Civil:</label>
-            <input type="text" id="estado_civil" disabled>
-        </div>
+        <label for="escolaridade">Escolaridade:</label>
+        <input type="text" id="escolaridade" disabled><br>
 
+        <label for="formacao">Formação:</label>
+        <input type="text" id="formacao" disabled><br>
 
+        <label for="profissao">Profissão / Atividade Comercial:</label>
+        <input type="text" id="profissao" disabled><br>
 
+        <label for="apelido">Apelido:</label>
+        <input type="text" id="apelido" disabled><br>
 
+        <label for="estado_civil">Estado Civil:</label>
+        <input type="text" id="estado_civil" disabled><br>
 
-        <label for="assunto">Contato: </label>
+        <label for="cpf">CPF:</label>
+        <input type="text" id="cpf" disabled><br>
 
-        <div class="form-group_contato">
-            <label for="telefone">Telefone:</label>
-            <input type="text" id="telefone" disabled>
+        <label for="rg">RG + UF:</label>
+        <input type="text" id="rg" disabled><br>
 
-            <label for="email">E-mail:</label>
-            <input type="email" id="email" disabled>
-        </div>
-        
+        <label for="naturalidade">Naturalidade:</label>
+        <input type="text" id="naturalidade" disabled><br>
 
-        <label for="assunto">ENDEREÇO: </label>
-        <div class="form-group_endereco">
-            <label for="cidade">Cidade:</label>
-            <input type="text" id="cidade" disabled>
-       
+        <label for="nacionalidade">Nacionalidade:</label>
+        <input type="text" id="nacionalidade" disabled><br>
 
-       
-            <label for="endereco">Endereço:</label>
-            <input type="text" id="endereco" disabled>
-        
+        <label for="nome_conjuge">Nome do Cônjuge:</label>
+        <input type="text" id="nome_conjuge" disabled><br>
 
-            <label for="cep">CEP:</label>
-            <input type="text" id="cep" disabled>
-        
+        <label for="data_casamento">Data de Casamento:</label>
+        <input type="text" id="data_casamento" disabled><br>
 
-            <label for="numero">Número:</label>
-            <input type="text" id="numero" disabled>
-      
-            <label for="bairro">Bairro:</label>
-            <input type="text" id="bairro" disabled>
-        </div>
+        <label for="conjuge_membro">O cônjuge é membro da igreja?</label>
+        <input type="text" id="conjuge_membro" disabled><br>
 
-       
+        <label for="cep">CEP:</label>
+        <input type="text" id="cep" disabled><br>
 
-        <label for="assunto">Profissão: </label>
-        
+        <label for="endereco">Endereço:</label>
+        <input type="text" id="endereco" disabled><br>
 
-        <div class="form-group_profissao">
-            <label for="empresario">É Empresário?</label>
-            <input type="text" id="empresario" disabled>
-        
-            <label for="escolaridade">Escolaridade:</label>
-            <input type="text" id="escolaridade" disabled>
-        
-            <label for="formacao">Formação:</label>
-            <input type="text" id="formacao" disabled>
-        
-            <label for="profissao">Profissão / Atividade Comercial:</label>
-            <input type="text" id="profissao" disabled>
-        
-            <label for="apelido">Apelido:</label>
-            <input type="text" id="apelido" disabled>
-        </div>
+        <label for="numero">Número:</label>
+        <input type="text" id="numero" disabled><br>
 
-        
+        <label for="bairro">Bairro:</label>
+        <input type="text" id="bairro" disabled><br>
 
-        
+        <label for="dependente_1">Dependente 1 - Nome:</label>
+        <input type="text" id="dependente_1" disabled><br>
 
-        <label for="assunto">Dados sobre o conjunge: </label>
+        <label for="dependente_2">Dependente 2 - Nome:</label>
+        <input type="text" id="dependente_2" disabled><br>
 
-        <div class="form-group_nome_do_conjunge">
-            <label for="nome_conjuge">Nome do Cônjuge:</label>
-            <input type="text" id="nome_conjuge" disabled>
-       
-            <label for="data_casamento">Data de Casamento:</label>
-            <input type="text" id="data_casamento" disabled>
-        
-            <label for="conjuge_membro">O cônjuge é membro da igreja?</label>
-            <input type="text" id="conjuge_membro" disabled>
-        </div>
+        <label for="dependente_3">Dependente 3 - Nome:</label>
+        <input type="text" id="dependente_3" disabled><br>
 
-        <label for="assunto">Dependentes: </label>
+        <label for="dependente_4">Dependente 4 - Nome:</label>
+        <input type="text" id="dependente_4" disabled><br>
 
-        <div class="form-group_dependente1">
-            <label for="dependente_1">Dependente 1 - Nome:</label>
-            <input type="text" id="dependente_1" disabled>
-        
-            <label for="dependente_2">Dependente 2 - Nome:</label>
-            <input type="text" id="dependente_2" disabled>
-       
-            <label for="dependente_3">Dependente 3 - Nome:</label>
-            <input type="text" id="dependente_3" disabled>
-       
-            <label for="dependente_4">Dependente 4 - Nome:</label>
-            <input type="text" id="dependente_4" disabled>
-        </div>
+        <label for="rhema">Rhema:</label>
+        <input type="text" id="rhema" disabled><br>
 
+        <label for="escola_ministros">Escola de Ministros Rhema:</label>
+        <input type="text" id="escola_ministros" disabled><br>
 
-        <label for="assunto">Formações: </label>
-        <div class="form-group_rhema">
-            <label for="rhema">Rhema:</label>
-            <input type="text" id="rhema" disabled>
-       
-            <label for="escola_ministros">Escola de Ministros Rhema:</label>
-            <input type="text" id="escola_ministros" disabled>
-       
-            <label for="escola_missoes">Escola de Missões Rhema:</label>
-            <input type="text" id="escola_missoes" disabled>
-        </div>
+        <label for="escola_missoes">Escola de Missões Rhema:</label>
+        <input type="text" id="escola_missoes" disabled><br>
 
-        <label for="assunto">Espiritual: </label>
+        <label for="novo_nascimento">Data do Novo Nascimento:</label>
+        <input type="text" id="novo_nascimento" disabled><br>
 
-        <div class="form-group_datadoNascimento">
-            <label for="novo_nascimento">Data do Novo Nascimento:</label>
-            <input type="text" id="novo_nascimento" disabled>
-        
-            <label for="batismo_aguas">Já se batizou nas águas?</label>
-            <input type="text" id="batismo_aguas" disabled>
-      
-            <label for="batismo_espirito">Já recebeu o batismo no Espírito Santo?</label>
-            <input type="text" id="batismo_espirito" disabled>
-        </div>
+        <label for="batismo_aguas">Já se batizou nas águas?</label>
+        <input type="text" id="batismo_aguas" disabled><br>
 
-        <label for="assunto">Redes sociais: </label>
+        <label for="batismo_espirito">Já recebeu o batismo no Espírito Santo?</label>
+        <input type="text" id="batismo_espirito" disabled><br>
 
-        <div class="form-group_instagram">
-            <label for="instagram">Instagram:</label>
-            <input type="text" id="instagram" disabled>
-        
-            <label for="facebook">Facebook:</label>
-            <input type="text" id="facebook" disabled>
-        </div>
+        <label for="instagram">Instagram:</label>
+        <input type="text" id="instagram" disabled><br>
 
-        <div class="form-group_observacoes">
-            <label for="observacoes">Observações Finais:</label>
-            <input type="text" id="observacoes" disabled>
-        </div>
+        <label for="facebook">Facebook:</label>
+        <input type="text" id="facebook" disabled><br>
+
+        <label for="observacoes">Observações Finais:</label>
+        <input type="text" id="observacoes" disabled><br>
     </form>
-    
+
+    <input type="file" id="fileInput" onchange="carregarPlanilha(event)"><br><br>
 
     <script>
         let funcionarios = []; // Lista de funcionários que será preenchida com os dados da planilha
