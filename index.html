@@ -3,133 +3,424 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulário de Funcionários</title>
-    <style>
-        label, select, input {
-            margin: 10px;
-        }
-    </style>
+    <title>Formulário de Membros</title>
+    <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
+    
 </head>
 <body>
+    <img src="logo-azul-vertical.png" alt="Imagem no topo" class="top-image">
+    <h1>FORMULÁRIO DE ATUALIZAÇÃO CADASTRAL</h1>
 
-    <h1>Selecione um Funcionário</h1>
+    <!-- Input para carregar o arquivo Excel -->
+    <input type="file" id="fileInput" onchange="carregarPlanilha(event)" class="input_form"><br><br>
+
+    <!-- Campo de seleção para escolher o membro -->
+    <div class="field">
+        <label for="selecionarMembro">Selecione um Membro:</label>
+        <select id="selecionarMembro" onchange="preencherCampos()">
+            <option value="">Escolha um nome</option>
+        </select>
+    </div>
 
     <!-- Formulário -->
     <form id="funcionarioForm">
-        <label for="nome">Nome:</label>
-        <select id="nome" onchange="preencherCampos()">
-            <option value="">Escolha um nome</option>
-        </select><br>
+        <!-- Dados Pessoais -->
+        <label for="assunto" class="section-title">Dados Pessoais:</label>
+        <div class="form-group_pessoal">
+            <!-- Nome -->
+            <div class="field">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome">
+            </div>
 
-        <label for="telefone">Telefone:</label>
-        <input type="text" id="telefone" disabled><br>
+            <!-- Sexo -->
+            <div class="field">
+                <label>Sexo:</label>
+                <div class="radio-group">
+                    <div>
+                        <input type="radio" id="masculino" name="sexo" value="masculino">
+                        <label for="masculino">Masculino</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="feminino" name="sexo" value="feminino">
+                        <label for="feminino">Feminino</label>
+                    </div>
+                </div>
+            </div>
 
-        <label for="cidade">Cidade:</label>
-        <input type="text" id="cidade" disabled><br>
+            <!-- Grau de Instrução e Formação -->
+            <div class="instrucao-formacao">
+                <div class="field">
+                    <label for="grau_instrucao">Grau de Instrução:</label>
+                    <select id="grau_instrucao">
+                        <option value="">Selecione</option>
+                        <option value="fundamental">Fundamental</option>
+                        <option value="medio">Médio</option>
+                        <option value="superior">Superior</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label for="formacao">Formação:</label>
+                    <input type="text" id="formacao">
+                </div>
+            </div>
 
-        <label for="genero">Gênero:</label>
-        <input type="text" id="genero" disabled><br>
+            <!-- É Empresário e Profissão -->
+            <div class="empresario-profissao">
+                <div class="field">
+                    <label for="empresario">É Empresário?</label>
+                    <div class="radio-group">
+                        <div>
+                            <input type="radio" id="empresario_sim" name="empresario" value="sim">
+                            <label for="empresario_sim">Sim</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="empresario_nao" name="empresario" value="nao">
+                            <label for="empresario_nao">Não</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="profissao">Profissão/Atividade Comercial:</label>
+                    <input type="text" id="profissao">
+                </div>
+            </div>
 
-        <label for="data_nascimento">Data de Nascimento:</label>
-        <input type="text" id="data_nascimento" disabled><br>
+            <!-- CPF, RG e SSP -->
+            <div class="documentos">
+                <div class="field">
+                    <label for="cpf">CPF:</label>
+                    <input type="text" id="cpf">
+                </div>
+                <div class="field">
+                    <label for="rg">RG:</label>
+                    <input type="text" id="rg">
+                </div>
+                <div class="field">
+                    <label for="ssp">SSP:</label>
+                    <input type="text" id="ssp">
+                </div>
+            </div>
 
-        <label for="email">E-mail:</label>
-        <input type="email" id="email" disabled><br>
+            <!-- Naturalidade e Nacionalidade -->
+            <div class="naturalidade-nacionalidade">
+                <div class="field">
+                    <label for="naturalidade">Naturalidade:</label>
+                    <input type="text" id="naturalidade">
+                </div>
+                <div class="field">
+                    <label for="nacionalidade">Nacionalidade:</label>
+                    <input type="text" id="nacionalidade">
+                </div>
+            </div>
 
-        <label for="empresario">É Empresário?</label>
-        <input type="text" id="empresario" disabled><br>
+            <!-- Data de Nascimento e Estado Civil -->
+            <div class="nascimento-estado-civil">
+                <div class="field">
+                    <label for="data_nascimento">Data de Nascimento:</label>
+                    <input type="text" id="data_nascimento">
+                </div>
+                <div class="field">
+                    <label for="estado_civil">Estado Civil:</label>
+                    <input type="text" id="estado_civil">
+                </div>
+            </div>
 
-        <label for="escolaridade">Escolaridade:</label>
-        <input type="text" id="escolaridade" disabled><br>
+            <!-- Nome do Cônjuge -->
+            <div class="field">
+                <label for="nome_conjuge" style="font-size: 14px; color: #333; margin-top: 10px;">SE CASADO:</label>
+                <input type="text" id="nome_conjuge">
+            </div>
 
-        <label for="formacao">Formação:</label>
-        <input type="text" id="formacao" disabled><br>
+            <!-- Data de Casamento e Membro Casado -->
+            <div class="conjuge-casamento">
+                <div class="field">
+                    <label for="data_casamento">Data do Casamento:</label>
+                    <input type="text" id="data_casamento">
+                </div>
+                <div class="field">
+                    <label>Membro é casado?</label>
+                    <div class="radio-group">
+                        <div>
+                            <input type="radio" id="membro_casado_sim" name="membro_casado" value="sim">
+                            <label for="membro_casado_sim">Sim</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="membro_casado_nao" name="membro_casado" value="nao">
+                            <label for="membro_casado_nao">Não</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        <label for="profissao">Profissão / Atividade Comercial:</label>
-        <input type="text" id="profissao" disabled><br>
+            <!-- Endereço -->
+            <div class="field">
+                <label for="endereco">Endereço:</label>
+                <input type="text" id="endereco">
+            </div>
 
-        <label for="apelido">Apelido:</label>
-        <input type="text" id="apelido" disabled><br>
+            <!-- Cidade e Bairro -->
+            <div class="endereco-cidade-bairro">
+                <div class="field">
+                    <label for="cidade">Cidade:</label>
+                    <input type="text" id="cidade">
+                </div>
+                <div class="field">
+                    <label for="bairro">Bairro:</label>
+                    <input type="text" id="bairro">
+                </div>
+            </div>
 
-        <label for="estado_civil">Estado Civil:</label>
-        <input type="text" id="estado_civil" disabled><br>
+            <!-- Número, Estado, País e CEP -->
+            <div class="numero-estado-pais-cep">
+                <div class="field">
+                    <label for="numero">Número:</label>
+                    <input type="text" id="numero">
+                </div>
+                <div class="field">
+                    <label for="estado">Estado:</label>
+                    <input type="text" id="estado">
+                </div>
+                <div class="field">
+                    <label for="pais">País:</label>
+                    <input type="text" id="pais">
+                </div>
+                <div class="field">
+                    <label for="cep">CEP:</label>
+                    <input type="text" id="cep">
+                </div>
+            </div>
 
-        <label for="cpf">CPF:</label>
-        <input type="text" id="cpf" disabled><br>
+            <!-- Telefone 1 e Operadora -->
+            <div class="telefone-operadora">
+                <div class="field">
+                    <label for="telefone1">Telefone 1:</label>
+                    <input type="text" id="telefone1">
+                </div>
+                <div class="field">
+                    <label>WhatsApp?</label>
+                    <div class="radio-group">
+                        <div>
+                            <input type="radio" id="whatsapp1_sim" name="whatsapp1" value="sim">
+                            <label for="whatsapp1_sim">Sim</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="whatsapp1_nao" name="whatsapp1" value="nao">
+                            <label for="whatsapp1_nao">Não</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="operadora1">Operadora:</label>
+                    <input type="text" id="operadora1">
+                </div>
+            </div>
 
-        <label for="rg">RG + UF:</label>
-        <input type="text" id="rg" disabled><br>
+            <!-- Telefone 2 e Operadora -->
+            <div class="telefone-operadora">
+                <div class="field">
+                    <label for="telefone2">Telefone 2:</label>
+                    <input type="text" id="telefone2">
+                </div>
+                <div class="field">
+                    <label>WhatsApp?</label>
+                    <div class="radio-group">
+                        <div>
+                            <input type="radio" id="whatsapp2_sim" name="whatsapp2" value="sim">
+                            <label for="whatsapp2_sim">Sim</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="whatsapp2_nao" name="whatsapp2" value="nao">
+                            <label for="whatsapp2_nao">Não</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="operadora2">Operadora:</label>
+                    <input type="text" id="operadora2">
+                </div>
+            </div>
 
-        <label for="naturalidade">Naturalidade:</label>
-        <input type="text" id="naturalidade" disabled><br>
+            <!-- Email -->
+            <div class="field">
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" style="height: 35px;">
+            </div>
 
-        <label for="nacionalidade">Nacionalidade:</label>
-        <input type="text" id="nacionalidade" disabled><br>
+            <!-- Dependentes -->
+            <div class="dependentes">
+                <div class="field">
+                    <label for="dependente1">Dependente 1:</label>
+                    <input type="text" id="dependente1">
+                </div>
+                <div class="field">
+                    <label for="data_nascimento_dependente1">Data de Nascimento:</label>
+                    <input type="text" id="data_nascimento_dependente1">
+                </div>
+            </div>
+            <div class="dependentes">
+                <div class="field">
+                    <label for="dependente2">Dependente 2:</label>
+                    <input type="text" id="dependente2">
+                </div>
+                <div class="field">
+                    <label for="data_nascimento_dependente2">Data de Nascimento:</label>
+                    <input type="text" id="data_nascimento_dependente2">
+                </div>
+            </div>
+            <div class="dependentes">
+                <div class="field">
+                    <label for="dependente3">Dependente 3:</label>
+                    <input type="text" id="dependente3">
+                </div>
+                <div class="field">
+                    <label for="data_nascimento_dependente3">Data de Nascimento:</label>
+                    <input type="text" id="data_nascimento_dependente3">
+                </div>
+            </div>
+            <div class="dependentes">
+                <div class="field">
+                    <label for="dependente4">Dependente 4:</label>
+                    <input type="text" id="dependente4">
+                </div>
+                <div class="field">
+                    <label for="data_nascimento_dependente4">Data de Nascimento:</label>
+                    <input type="text" id="data_nascimento_dependente4">
+                </div>
+            </div>
 
-        <label for="nome_conjuge">Nome do Cônjuge:</label>
-        <input type="text" id="nome_conjuge" disabled><br>
+            <!-- Rhema/EMR/ERMM -->
+            <div class="rhema-emr-ermm">
+                <div class="field">
+                    <label>Rhema:</label>
+                    <div class="radio-group">
+                        <div>
+                            <input type="radio" id="rhema_sim" name="rhema" value="sim">
+                            <label for="rhema_sim">Sim</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="rhema_nao" name="rhema" value="nao">
+                            <label for="rhema_nao">Não</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="data_conclusao_rhema">Data de Conclusão:</label>
+                    <input type="text" id="data_conclusao_rhema">
+                </div>
+            </div>
+            <div class="rhema-emr-ermm">
+                <div class="field">
+                    <label>EMR:</label>
+                    <div class="radio-group">
+                        <div>
+                            <input type="radio" id="emr_sim" name="emr" value="sim">
+                            <label for="emr_sim">Sim</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="emr_nao" name="emr" value="nao">
+                            <label for="emr_nao">Não</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="data_conclusao_emr">Data de Conclusão:</label>
+                    <input type="text" id="data_conclusao_emr">
+                </div>
+            </div>
+            <div class="rhema-emr-ermm">
+                <div class="field">
+                    <label>ERMM:</label>
+                    <div class="radio-group">
+                        <div>
+                            <input type="radio" id="ermm_sim" name="ermm" value="sim">
+                            <label for="ermm_sim">Sim</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="ermm_nao" name="ermm" value="nao">
+                            <label for="ermm_nao">Não</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="data_conclusao_ermm">Data de Conclusão:</label>
+                    <input type="text" id="data_conclusao_ermm">
+                </div>
+            </div>
 
-        <label for="data_casamento">Data de Casamento:</label>
-        <input type="text" id="data_casamento" disabled><br>
+            <!-- Batismo e Espírito Santo -->
+            <div class="batismo-espirito">
+                <div class="field">
+                    <label for="data_novo_nascimento">Data do Novo Nascimento:</label>
+                    <input type="text" id="data_novo_nascimento">
+                </div>
+                <div class="field">
+                    <label>Já recebeu o Espírito Santo?</label>
+                    <div class="radio-group">
+                        <div>
+                            <input type="radio" id="espirito_santo_sim" name="espirito_santo" value="sim">
+                            <label for="espirito_santo_sim">Sim</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="espirito_santo_nao" name="espirito_santo" value="nao">
+                            <label for="espirito_santo_nao">Não</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        <label for="conjuge_membro">O cônjuge é membro da igreja?</label>
-        <input type="text" id="conjuge_membro" disabled><br>
+            <!-- Batismo nas Águas -->
+            <div class="batismo-espirito">
+                <div class="field">
+                    <label>Batismo nas Águas:</label>
+                    <div class="radio-group">
+                        <div>
+                            <input type="radio" id="batismo_aguas_sim" name="batismo_aguas" value="sim">
+                            <label for="batismo_aguas_sim">Sim</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="batismo_aguas_nao" name="batismo_aguas" value="nao">
+                            <label for="batismo_aguas_nao">Não</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Forma de Batismo:</label>
+                    <div class="radio-group">
+                        <div>
+                            <input type="radio" id="aspersao" name="forma_batismo" value="aspersao">
+                            <label for="aspersao">Aspersão</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="imersao" name="forma_batismo" value="imersao">
+                            <label for="imersao">Imersão</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        <label for="cep">CEP:</label>
-        <input type="text" id="cep" disabled><br>
+            <!-- Redes Sociais -->
+            <div class="redes-sociais">
+                <div class="field">
+                    <label for="facebook">Facebook:</label>
+                    <input type="text" id="facebook">
+                </div>
+                <div class="field">
+                    <label for="instagram">Instagram:</label>
+                    <input type="text" id="instagram">
+                </div>
+            </div>
 
-        <label for="endereco">Endereço:</label>
-        <input type="text" id="endereco" disabled><br>
-
-        <label for="numero">Número:</label>
-        <input type="text" id="numero" disabled><br>
-
-        <label for="bairro">Bairro:</label>
-        <input type="text" id="bairro" disabled><br>
-
-        <label for="dependente_1">Dependente 1 - Nome:</label>
-        <input type="text" id="dependente_1" disabled><br>
-
-        <label for="dependente_2">Dependente 2 - Nome:</label>
-        <input type="text" id="dependente_2" disabled><br>
-
-        <label for="dependente_3">Dependente 3 - Nome:</label>
-        <input type="text" id="dependente_3" disabled><br>
-
-        <label for="dependente_4">Dependente 4 - Nome:</label>
-        <input type="text" id="dependente_4" disabled><br>
-
-        <label for="rhema">Rhema:</label>
-        <input type="text" id="rhema" disabled><br>
-
-        <label for="escola_ministros">Escola de Ministros Rhema:</label>
-        <input type="text" id="escola_ministros" disabled><br>
-
-        <label for="escola_missoes">Escola de Missões Rhema:</label>
-        <input type="text" id="escola_missoes" disabled><br>
-
-        <label for="novo_nascimento">Data do Novo Nascimento:</label>
-        <input type="text" id="novo_nascimento" disabled><br>
-
-        <label for="batismo_aguas">Já se batizou nas águas?</label>
-        <input type="text" id="batismo_aguas" disabled><br>
-
-        <label for="batismo_espirito">Já recebeu o batismo no Espírito Santo?</label>
-        <input type="text" id="batismo_espirito" disabled><br>
-
-        <label for="instagram">Instagram:</label>
-        <input type="text" id="instagram" disabled><br>
-
-        <label for="facebook">Facebook:</label>
-        <input type="text" id="facebook" disabled><br>
-
-        <label for="observacoes">Observações Finais:</label>
-        <input type="text" id="observacoes" disabled><br>
+            <!-- Observações -->
+            <div class="field">
+                <label for="observacoes">Observações:</label>
+                <textarea id="observacoes"></textarea>
+            </div>
+        </div>
     </form>
 
-    <input type="file" id="fileInput" onchange="carregarPlanilha(event)"><br><br>
-
+    <!-- Script de leitura do arquivo -->
     <script>
         let funcionarios = []; // Lista de funcionários que será preenchida com os dados da planilha
 
@@ -159,7 +450,7 @@
                 });
 
                 // Atualiza a variável funcionarios com os dados limpos
-                funcionarios = cleanRows; 
+                funcionarios = cleanRows;
 
                 // Adiciona um console.log para ver se os dados foram limpos corretamente
                 console.log("Dados lidos e limpos da planilha:", funcionarios);
@@ -171,7 +462,7 @@
 
         // Função para preencher o select com os nomes
         function preencherSelect() {
-            const select = document.getElementById("nome");
+            const select = document.getElementById("selecionarMembro");
             select.innerHTML = '<option value="">Escolha um nome</option>'; // Reseta a lista
 
             funcionarios.forEach((funcionario) => {
@@ -186,11 +477,13 @@
 
         // Função para preencher os campos com os dados do funcionário
         function preencherCampos() {
-            const nomeSelecionado = document.getElementById("nome").value;
+            const nomeSelecionado = document.getElementById("selecionarMembro").value;
             const funcionario = funcionarios.find(f => f["Nome"] === nomeSelecionado);
 
             if (funcionario) {
-                document.getElementById("telefone").value = funcionario["Telefone"] || "Não informado";
+                // Preenche os campos do formulário com os dados do funcionário
+                document.getElementById("nome").value = funcionario["Nome"] || "Não informado";
+                document.getElementById("telefone1").value = funcionario["Telefone"] || "Não informado";
                 document.getElementById("cidade").value = funcionario["Cidade"] || "Não informado";
                 document.getElementById("genero").value = funcionario["Gênero"] || "Não informado";
                 document.getElementById("data_nascimento").value = funcionario["Data de Nascimento"] || "Não informado";
@@ -212,29 +505,46 @@
                 document.getElementById("endereco").value = funcionario["Endereço"] || "Não informado";
                 document.getElementById("numero").value = funcionario["Número"] || "Não informado";
                 document.getElementById("bairro").value = funcionario["Bairro"] || "Não informado";
-                document.getElementById("dependente_1").value = funcionario["Dependente 1 - Nome"] || "Não informado";
-                document.getElementById("dependente_2").value = funcionario["Dependente 2 - Nome"] || "Não informado";
-                document.getElementById("dependente_3").value = funcionario["Dependente 3 - Nome"] || "Não informado";
-                document.getElementById("dependente_4").value = funcionario["Dependente 4 - Nome"] || "Não informado";
+                document.getElementById("dependente1").value = funcionario["Dependente 1 - Nome"] || "Não informado";
+                document.getElementById("dependente2").value = funcionario["Dependente 2 - Nome"] || "Não informado";
+                document.getElementById("dependente3").value = funcionario["Dependente 3 - Nome"] || "Não informado";
+                document.getElementById("dependente4").value = funcionario["Dependente 4 - Nome"] || "Não informado";
                 document.getElementById("rhema").value = funcionario["Rhema"] || "Não informado";
                 document.getElementById("escola_ministros").value = funcionario["Escola de Ministros Rhema"] || "Não informado";
                 document.getElementById("escola_missoes").value = funcionario["Escola de Missões Rhema"] || "Não informado";
-                document.getElementById("novo_nascimento").value = funcionario["Data do novo nascimento"] || "Não informado";
+                document.getElementById("data_novo_nascimento").value = funcionario["Data do novo nascimento"] || "Não informado";
                 document.getElementById("batismo_aguas").value = funcionario["Já se batizou nas águas?"] || "Não informado";
                 document.getElementById("batismo_espirito").value = funcionario["Já recebeu o batismo no Espírito Santo?"] || "Não informado";
                 document.getElementById("instagram").value = funcionario["Instagram"] || "Não informado";
                 document.getElementById("facebook").value = funcionario["Facebook"] || "Não informado";
                 document.getElementById("observacoes").value = funcionario["Observações Finais"] || "Não informado";
+
+                // Preencher campos de rádio "Sim" ou "Não"
+                marcarRadio(funcionario["Rhema"], "rhema");
+                marcarRadio(funcionario["Escola de Ministros Rhema"], "emr");
+                marcarRadio(funcionario["Escola de Missões Rhema"], "ermm");
+                marcarRadio(funcionario["Já se batizou nas águas?"], "batismo_aguas");
+                marcarRadio(funcionario["Já recebeu o batismo no Espírito Santo?"], "batismo_espirito");
             } else {
                 limparCampos();
+            }
+        }
+
+        // Função para marcar os botões de rádio baseados no valor
+        function marcarRadio(valor, nomeCampo) {
+            if (valor && valor.toLowerCase() === "sim") {
+                document.querySelector(`#${nomeCampo}_sim`).checked = true;
+            } else {
+                document.querySelector(`#${nomeCampo}_nao`).checked = true;
             }
         }
 
         function limparCampos() {
             const campos = document.querySelectorAll('input');
             campos.forEach(campo => campo.value = '');
+            const radios = document.querySelectorAll('input[type="radio"]');
+            radios.forEach(radio => radio.checked = false);  // Limpa os botões de rádio
         }
     </script>
-
 </body>
 </html>
