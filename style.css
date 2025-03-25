@@ -1,220 +1,294 @@
-/* Estilos gerais */
-* {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  /* Reset básico */
+  * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
-    color: rgb(214, 214, 214);
+    font-family: Arial, sans-serif;
 }
 
-.top-image {
-    width: 10%; /* Isso redimensiona a imagem para ocupar toda a largura disponível */
-    height: auto; /* Mantém a proporção da imagem */
-}
 body {
-    background-color: #ffffff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    padding: 20px;
+    padding: 10px;
+    background-color: #f9f9f9;
 }
 
-/* Formulário */
-form {
-    background-color: rgba(255, 255, 255, 0.05);
-    padding: 20px;
-    border-radius: 10px;
-    width: 90%;
-    max-width: 1000px;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+/* Logo centralizado */
+.top-image {
+    display: block;
+    margin: 0 auto 10px auto;
+    max-width: 150px;
 }
 
-/* Divs organizadas para dados pessoais, contato, etc. */
-.form-group_pessoal,
-.form-group_contato,
-.form-group_endereco,
-.form-group_profissao,
-.form-group_nome_do_conjunge,
-.form-group_dependente1,
-.form-group_rhema,
-.form-group_datadoNascimento,
-.form-group_instagram,
-.form-group_observacoes {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    width: 100%;
+/* Título do formulário */
+h1 {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #333;
 }
 
-.form-group_pessoal label,
-.form-group_contato label,
-.form-group_endereco label,
-.form-group_profissao label,
-.form-group_nome_do_conjunge label,
-.form-group_dependente1 label,
-.form-group_rhema label,
-.form-group_datadoNascimento label,
-.form-group_instagram label,
-.form-group_observacoes label {
-    width: 100%;
+/* Estilo dos campos e labels */
+.form-group {
+    margin-bottom: 10px;
 }
 
-.form-group_pessoal input,
-.form-group_contato input,
-.form-group_endereco input,
-.form-group_profissao input,
-.form-group_nome_do_conjunge input,
-.form-group_dependente1 input,
-.form-group_rhema input,
-.form-group_datadoNascimento input,
-.form-group_instagram input,
-.form-group_observacoes input {
-    width: 48%; /* Deixa os campos lado a lado */
-}
-
-.form-group_pessoal input:last-child,
-.form-group_contato input:last-child,
-.form-group_endereco input:last-child,
-.form-group_profissao input:last-child,
-.form-group_nome_do_conjunge input:last-child,
-.form-group_dependente1 input:last-child,
-.form-group_rhema input:last-child,
-.form-group_datadoNascimento input:last-child,
-.form-group_instagram input:last-child {
-    width: 100%; /* Quebra a linha no último campo para dar espaçamento */
+.field {
+    margin-bottom: 10px;
 }
 
 label {
     display: block;
-    font-size: 14px;
-    margin-top: 10px;
-    color: #8f8d8d;
+    font-size: 12px;
+    color: #555;
+    margin-bottom: 3px;
 }
 
-input, select {
+input[type="text"],
+select,
+textarea {
     width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    background-color: transparent;
-    border: 1px solid #b1aeae;
+    height: 30px; /* Altura reduzida */
+    padding: 5px;
+    font-size: 12px;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    color: rgb(163, 163, 163);
-    font-size: 16px;
+    background-color: #fff;
+   
+}
+.input-readonly {
+    pointer-events: none;
+    background-color: #f5f5f5;
 }
 
-input:focus, select:focus {
-    outline: none;
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+textarea {
+    height: 50px; /* Altura maior para o campo de observações */
 }
 
-/* Seção separada por linhas */
-form > label {
-    margin-top: 30px;
-    border-top: 1px solid #ddd;
-    padding-top: 15px;
-    font-size: 16px;
-    color: #007bff;
+input[type="radio"] {
+    margin-right: 5px;
 }
 
-/* Botões */
-button, input[type=submit] {
-    background-color: #007bff;
-    color: rgb(4, 21, 255);
-    border: none;
-    padding: 10px;
-    width: 100%;
-    margin-top: 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
+/* Campos alinhados lado a lado */
+.row {
+    display: flex;
+    gap: 10px;
 }
 
-button:hover, input[type=submit]:hover {
-    background-color: #0056b3;
+.row .field {
+    flex: 1;
 }
 
-/* Checkbox e Radio */
-.checkbox-group, .radio-group {
+/* Campos específicos */
+#nome,
+#nome_conjuge,
+#endereco,
+#email,
+#observacoes {
+    width: calc(100% - 20px); /* Margem reduzida */
+    margin: 0 10px;
+}
+
+/* Botões de rádio para sexo */
+.sexo-group {
+    display: flex;
+    gap: 10px;
+    margin-left: 10px;
+}
+
+/* Campos de Grau de Instrução e Formação */
+.instrucao-formacao {
+    display: flex;
+    gap: 10px;
+    margin: 0 10px;
+}
+
+.instrucao-formacao .field {
+    flex: 1;
+}
+
+/* Campos de Empresário e Profissão */
+.empresario-profissao {
+    display: flex;
+    gap: 10px;
+    margin: 0 10px;
+}
+
+.empresario-profissao .field {
+    flex: 1;
+}
+
+/* Campos de CPF, RG e SSP */
+.documentos {
+    display: flex;
+    gap: 10px;
+    margin: 0 10px;
+}
+
+.documentos .field {
+    flex: 1;
+}
+
+/* Campos de Naturalidade e Nacionalidade */
+.naturalidade-nacionalidade {
+    display: flex;
+    gap: 10px;
+    margin: 0 10px;
+}
+
+.naturalidade-nacionalidade .field {
+    flex: 1;
+}
+
+/* Campos de Data de Nascimento e Estado Civil */
+.nascimento-estado-civil {
+    display: flex;
+    gap: 10px;
+    margin: 0 10px;
+}
+
+.nascimento-estado-civil .field {
+    flex: 1;
+}
+
+/* Campos de Nome do Cônjuge e Data de Casamento */
+.conjuge-casamento {
+    display: flex;
+    gap: 10px;
+    margin: 0 10px;
+}
+
+.conjuge-casamento .field {
+    flex: 1;
+}
+
+/* Campos de Endereço, Cidade e Bairro */
+.endereco-cidade-bairro {
+    display: flex;
+    gap: 10px;
+    margin: 0 10px;
+}
+
+.endereco-cidade-bairro .field {
+    flex: 1;
+}
+
+/* Campos de Número, Estado, País e CEP */
+.numero-estado-pais-cep {
+    display: flex;
+    gap: 10px;
+    margin: 0 10px;
+}
+
+.numero-estado-pais-cep .field {
+    flex: 1;
+}
+
+.numero-estado-pais-cep .field:nth-child(1),
+.numero-estado-pais-cep .field:nth-child(2) {
+    flex: 0.5; /* Campos menores para Número e Estado */
+}
+
+/* Campos de Telefone e Operadora */
+.telefone-operadora {
+    display: flex;
+    gap: 10px;
+    margin: 0 10px;
+}
+
+.telefone-operadora .field {
+    flex: 1;
+}
+
+.telefone-operadora .field:nth-child(1) {
+    flex: 1.5; /* Campo maior para Telefone */
+}
+
+.telefone-operadora .field:nth-child(2) {
+    flex: 0.5; /* Campo menor para WhatsApp */
+}
+
+.telefone-operadora .field:nth-child(3) {
+    flex: 1; /* Campo para Operadora */
+}
+
+/* Campos de Dependentes */
+.dependentes {
+    display: flex;
+    gap: 10px;
+    margin: 0 10px;
+}
+
+.dependentes .field {
+    flex: 1;
+}
+
+/* Campos de Rhema/EMR/ERMM */
+.rhema-emr-ermm {
+    display: flex;
+    gap: 10px;
+    margin: 0 10px;
+}
+
+.rhema-emr-ermm .field {
+    flex: 1;
+}
+
+/* Campos de Batismo e Espírito Santo */
+.batismo-espirito {
+    display: flex;
+    gap: 10px;
+    margin: 0 10px;
+}
+
+.batismo-espirito .field {
+    flex: 1;
+}
+
+/* Campos de Redes Sociais */
+.redes-sociais {
+    display: flex;
+    gap: 10px;
+    margin: 0 10px;
+}
+
+.redes-sociais .field {
+    flex: 1;
+}
+
+/* Estilo para rádios lado a lado */
+.radio-group {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-top: 10px;
 }
-
-.checkbox-group input, .radio-group input {
-    width: auto;
-}
-
-/* Responsividade para telas pequenas */
-@media (max-width: 600px) {
-    form {
-        width: 100%;
-    }
-
-    .form-group_pessoal input,
-    .form-group_contato input,
-    .form-group_endereco input,
-    .form-group_profissao input,
-    .form-group_nome_do_conjunge input,
-    .form-group_dependente1 input,
-    .form-group_rhema input,
-    .form-group_datadoNascimento input,
-    .form-group_instagram input,
-    .form-group_observacoes input {
-        width: 100%; /* Em telas pequenas, os campos ocupam toda a largura */
-    }
-}
-
-/* Ajustes para impressão */
+/* No final do seu arquivo CSS, adicione: */
 @media print {
-    body {
-        width: 100%;
-        font-size: 12px;
-        padding: 20px;
+    /* Oculta o input de arquivo e o seletor de membros */
+    #fileInput,
+    #selecionarMembro,
+    .field > label[for="selecionarMembro"] {
+        display: none !important;
     }
-
-    form {
-        display: block;
+    
+    /* Garante que o formulário ocupe toda a largura */
+    #funcionarioForm {
         width: 100%;
-        box-shadow: none;
-        background-color: transparent;
+        margin: 0;
         padding: 0;
     }
-
-    .form-group {
-        width: 48%;
-        display: inline-block;
-        margin-right: 2%; /* Espaço entre os campos */
-        margin-bottom: 10px;
+    
+    /* Melhora a legibilidade na impressão */
+    body {
+        background-color: white;
+        font-size: 12pt;
+        padding: 0;
+        margin: 0;
     }
-
-    /* Ajusta os campos para ocupar a página inteira */
-    .form-group:last-child {
-        margin-right: 0;
+    
+    /* Remove fundos desnecessários */
+    input, select, textarea {
+        background-color: transparent !important;
+        border: 1px solid #ccc !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
     }
-
-    label {
-        margin-top: 5px;
-    }
-
-    input, select {
-        padding: 5px;
-        font-size: 12px;
-    }
-
-    /* Tamanho da imagem */
-    .input_form {
-        display: none;
-    }
-
-    /* Ajusta o espaçamento do formulário para impressão */
-    .form-group input, .form-group select {
-        font-size: 12px;
-    }
-
-   
 }
