@@ -422,129 +422,152 @@
 
     <!-- Script de leitura do arquivo -->
     <script>
-        let funcionarios = []; // Lista de funcionários que será preenchida com os dados da planilha
-
-        // Função para carregar a planilha
+        let membersData = [];
+        
         function carregarPlanilha(event) {
             const file = event.target.files[0];
             if (!file) return;
-
+            
             const reader = new FileReader();
-            reader.onload = function (e) {
-                const data = new Uint8Array(e.target.result);
-                const workbook = XLSX.read(data, { type: "array" });
-                const sheet = workbook.Sheets[workbook.SheetNames[0]]; // A primeira aba da planilha
-                const rows = XLSX.utils.sheet_to_json(sheet); // Converte para JSON
-
-                // Limpa os espaços das chaves
-                const cleanRows = rows.map(row => {
-                    const cleanedRow = {};
-                    for (let key in row) {
-                        if (row.hasOwnProperty(key)) {
-                            // Remove espaços extras no nome das chaves
-                            const cleanedKey = key.trim();
-                            cleanedRow[cleanedKey] = row[key];
-                        }
-                    }
-                    return cleanedRow;
-                });
-
-                // Atualiza a variável funcionarios com os dados limpos
-                funcionarios = cleanRows;
-
-                // Adiciona um console.log para ver se os dados foram limpos corretamente
-                console.log("Dados lidos e limpos da planilha:", funcionarios);
-
-                preencherSelect(); // Preenche o select com os nomes
+            reader.onload = function(e) {
+                try {
+                    const data = new Uint8Array(e.target.result);
+                    const workbook = XLSX.read(data, { type: 'array' });
+                    const firstSheetName = workbook.SheetNames[0];
+                    const worksheet = workbook.Sheets[firstSheetName];
+                    membersData = XLSX.utils.sheet_to_json(worksheet, { raw: false });
+                    
+                    const select = document.getElementById('selecionarMembro');
+                    
+                    // SOLUÇÃO DEFINITIVA - Recriando completamente o select
+                    const novoSelect = select.cloneNode(false); // Clona sem os filhos
+                    novoSelect.innerHTML = '<option value="">-- Selecione um membro --</option>';
+                    
+                    membersData.forEach((member, index) => {
+                        const option = document.createElement('option');
+                        option.value = index;
+                        option.textContent = member['Nome '] || member['Nome'] || `Membro ${index+1}`;
+                        option.style.color = '#000000'; // Garante texto preto
+                        novoSelect.appendChild(option);
+                    });
+                    
+                    // Substitui o select antigo pelo novo
+                    select.parentNode.replaceChild(novoSelect, select);
+                    novoSelect.id = 'selecionarMembro'; // Mantém o ID
+                    novoSelect.disabled = false;
+                    
+                    // Reatacha o event listener
+                    novoSelect.addEventListener('change', preencherCampos);
+                    
+                    // DEBUG FINAL
+                    console.log('Select após atualização:', novoSelect);
+                    console.log('Opções disponíveis:', novoSelect.options);
+                    
+                } catch (error) {
+                    console.error("Erro:", error);
+                    alert("Erro ao processar arquivo. Verifique o console.");
+                }
             };
+            
             reader.readAsArrayBuffer(file);
         }
-
-        // Função para preencher o select com os nomes
-        function preencherSelect() {
-            const select = document.getElementById("selecionarMembro");
-            select.innerHTML = '<option value="">Escolha um nome</option>'; // Reseta a lista
-
-            funcionarios.forEach((funcionario) => {
-                if (funcionario["Nome"]) { // Verifica se a coluna "Nome" existe
-                    const option = document.createElement("option");
-                    option.value = funcionario["Nome"];  // Valor da opção será o nome do funcionário
-                    option.textContent = funcionario["Nome"];  // Texto da opção será o nome do funcionário
-                    select.appendChild(option);
-                }
-            });
-        }
-
-        // Função para preencher os campos com os dados do funcionário
+       
         function preencherCampos() {
-            const nomeSelecionado = document.getElementById("selecionarMembro").value;
-            const funcionario = funcionarios.find(f => f["Nome"] === nomeSelecionado);
-
-            if (funcionario) {
-                // Preenche os campos do formulário com os dados do funcionário
-                document.getElementById("nome").value = funcionario["Nome"] || "Não informado";
-                document.getElementById("telefone1").value = funcionario["Telefone"] || "Não informado";
-                document.getElementById("cidade").value = funcionario["Cidade"] || "Não informado";
-                document.getElementById("genero").value = funcionario["Gênero"] || "Não informado";
-                document.getElementById("data_nascimento").value = funcionario["Data de Nascimento"] || "Não informado";
-                document.getElementById("email").value = funcionario["E-mail"] || "Não informado";
-                document.getElementById("empresario").value = funcionario["É empresário?"] || "Não informado";
-                document.getElementById("escolaridade").value = funcionario["Escolaridade"] || "Não informado";
-                document.getElementById("formacao").value = funcionario["Formação"] || "Não informado";
-                document.getElementById("profissao").value = funcionario["Profissão / Atividade Comercial"] || "Não informado";
-                document.getElementById("apelido").value = funcionario["Apelido"] || "Não informado";
-                document.getElementById("estado_civil").value = funcionario["Estado Civil"] || "Não informado";
-                document.getElementById("cpf").value = funcionario["CPF"] || "Não informado";
-                document.getElementById("rg").value = funcionario["RG + UF"] || "Não informado";
-                document.getElementById("naturalidade").value = funcionario["Naturalidade"] || "Não informado";
-                document.getElementById("nacionalidade").value = funcionario["Nacionalidade"] || "Não informado";
-                document.getElementById("nome_conjuge").value = funcionario["Nome do cônjuge"] || "Não informado";
-                document.getElementById("data_casamento").value = funcionario["Data de Casamento"] || "Não informado";
-                document.getElementById("conjuge_membro").value = funcionario["O cônjuge é membro da igreja?"] || "Não informado";
-                document.getElementById("cep").value = funcionario["CEP"] || "Não informado";
-                document.getElementById("endereco").value = funcionario["Endereço"] || "Não informado";
-                document.getElementById("numero").value = funcionario["Número"] || "Não informado";
-                document.getElementById("bairro").value = funcionario["Bairro"] || "Não informado";
-                document.getElementById("dependente1").value = funcionario["Dependente 1 - Nome"] || "Não informado";
-                document.getElementById("dependente2").value = funcionario["Dependente 2 - Nome"] || "Não informado";
-                document.getElementById("dependente3").value = funcionario["Dependente 3 - Nome"] || "Não informado";
-                document.getElementById("dependente4").value = funcionario["Dependente 4 - Nome"] || "Não informado";
-                document.getElementById("rhema").value = funcionario["Rhema"] || "Não informado";
-                document.getElementById("escola_ministros").value = funcionario["Escola de Ministros Rhema"] || "Não informado";
-                document.getElementById("escola_missoes").value = funcionario["Escola de Missões Rhema"] || "Não informado";
-                document.getElementById("data_novo_nascimento").value = funcionario["Data do novo nascimento"] || "Não informado";
-                document.getElementById("batismo_aguas").value = funcionario["Já se batizou nas águas?"] || "Não informado";
-                document.getElementById("batismo_espirito").value = funcionario["Já recebeu o batismo no Espírito Santo?"] || "Não informado";
-                document.getElementById("instagram").value = funcionario["Instagram"] || "Não informado";
-                document.getElementById("facebook").value = funcionario["Facebook"] || "Não informado";
-                document.getElementById("observacoes").value = funcionario["Observações Finais"] || "Não informado";
-
-                // Preencher campos de rádio "Sim" ou "Não"
-                marcarRadio(funcionario["Rhema"], "rhema");
-                marcarRadio(funcionario["Escola de Ministros Rhema"], "emr");
-                marcarRadio(funcionario["Escola de Missões Rhema"], "ermm");
-                marcarRadio(funcionario["Já se batizou nas águas?"], "batismo_aguas");
-                marcarRadio(funcionario["Já recebeu o batismo no Espírito Santo?"], "batismo_espirito");
-            } else {
-                limparCampos();
+            const selectedIndex = document.getElementById('selecionarMembro').value;
+            if (selectedIndex === "") return;
+            
+            const membro = membersData[selectedIndex];
+            console.log("Membro selecionado:", membro); // Para debug
+            
+            // Mapeamento dos campos - ajustado para sua planilha
+            // Campos básicos
+            document.getElementById('nome').value = membro['Nome '] || membro['Nome'] || '';
+            document.getElementById('cpf').value = membro['CPF'] || '';
+            document.getElementById('rg').value = membro['RG'] || '';
+            document.getElementById('naturalidade').value = membro['Naturalidade'] || '';
+            document.getElementById('nacionalidade').value = membro['Nacionalidade'] || '';
+            document.getElementById('data_nascimento').value = membro['Data de Nascimento'] || '';
+            document.getElementById('estado_civil').value = membro['Estado Civil'] || '';
+            document.getElementById('nome_conjuge').value = membro['Nome do cônjuge'] || '';
+            document.getElementById('data_casamento').value = membro['Data de Casamento'] || '';
+            document.getElementById('endereco').value = membro['Endereço'] || '';
+            document.getElementById('numero').value = membro['Numero'] || '';
+            document.getElementById('bairro').value = membro['Bairro'] || '';
+            document.getElementById('cidade').value = membro['Cidade'] || '';
+            document.getElementById('estado').value = membro['UF (Estado)'] || membro['UF'] || '';
+            document.getElementById('cep').value = membro['CEP'] || '';
+            document.getElementById('telefone1').value = membro['Telefone'] || '';
+            document.getElementById('email').value = membro['E-mail'] || '';
+            document.getElementById('formacao').value = membro['Formação'] || '';
+            document.getElementById('profissao').value = membro['Profissão / Atividade Comercial'] || '';
+            document.getElementById('dependente1').value = membro['Dependente 1 - Nome'] || '';
+            document.getElementById('dependente2').value = membro['Dependente 2 - Nome'] || '';
+            document.getElementById('dependente3').value = membro['Dependente 3 - Nome'] || '';
+            document.getElementById('dependente4').value = membro['Dependente 4 - Nome'] || '';
+            document.getElementById('data_nascimento_dependente1').value = membro['Dependente 1 - Data de Nascimento'] || '';
+            document.getElementById('data_nascimento_dependente2').value = membro['Dependente 2 - Data de Nascimento'] || '';
+            document.getElementById('data_nascimento_dependente3').value = membro['Dependente 3 - Data de Nascimento'] || '';
+            document.getElementById('data_nascimento_dependente4').value = membro['Dependente 4 - Data de Nascimento'] || '';
+            document.getElementById('data_novo_nascimento').value = membro['Data do novo nascimento'] || '';
+            document.getElementById('facebook').value = membro['Facebook'] || '';
+            document.getElementById('instagram').value = membro['Instagram'] || '';
+            document.getElementById('observacoes').value = membro['Observações Finais'] || '';
+            
+            // Radio buttons
+            document.getElementById('masculino').checked = (membro['Gênero'] || '').toLowerCase().includes('masc');
+            document.getElementById('feminino').checked = (membro['Gênero'] || '').toLowerCase().includes('fem');
+            
+            document.getElementById('empresario_sim').checked = (membro['É empresário?'] || '').toLowerCase().includes('sim');
+            document.getElementById('empresario_nao').checked = (membro['É empresário?'] || '').toLowerCase().includes('não') || 
+                                                              (membro['É empresário?'] || '').toLowerCase().includes('nao');
+            
+            document.getElementById('membro_casado_sim').checked = (membro['O cônjuge é membro da igreja?'] || '').toLowerCase().includes('sim');
+            document.getElementById('membro_casado_nao').checked = (membro['O cônjuge é membro da igreja?'] || '').toLowerCase().includes('não') || 
+                                                                 (membro['O cônjuge é membro da igreja?'] || '').toLowerCase().includes('nao');
+            
+            document.getElementById('rhema_sim').checked = (membro['Rhema'] || '').toLowerCase().includes('sim');
+            document.getElementById('rhema_nao').checked = (membro['Rhema'] || '').toLowerCase().includes('não') || 
+                                                         (membro['Rhema'] || '').toLowerCase().includes('nao');
+            
+            document.getElementById('emr_sim').checked = (membro['Escola de Ministros Rhema'] || '').toLowerCase().includes('sim');
+            document.getElementById('emr_nao').checked = (membro['Escola de Ministros Rhema'] || '').toLowerCase().includes('não') || 
+                                                       (membro['Escola de Ministros Rhema'] || '').toLowerCase().includes('nao');
+            
+            document.getElementById('ermm_sim').checked = (membro['Escola de Missões Rhema'] || '').toLowerCase().includes('sim');
+            document.getElementById('ermm_nao').checked = (membro['Escola de Missões Rhema'] || '').toLowerCase().includes('não') || 
+                                                        (membro['Escola de Missões Rhema'] || '').toLowerCase().includes('nao');
+            
+            document.getElementById('batismo_aguas_sim').checked = (membro['Já se batizou nas águas?'] || '').toLowerCase().includes('sim');
+            document.getElementById('batismo_aguas_nao').checked = (membro['Já se batizou nas águas?'] || '').toLowerCase().includes('não') || 
+                                                                 (membro['Já se batizou nas águas?'] || '').toLowerCase().includes('nao');
+            
+            document.getElementById('espirito_santo_sim').checked = (membro['Já recebeu o batismo no Espírito Santo?'] || '').toLowerCase().includes('sim');
+            document.getElementById('espirito_santo_nao').checked = (membro['Já recebeu o batismo no Espírito Santo?'] || '').toLowerCase().includes('não') || 
+                                                                  (membro['Já recebeu o batismo no Espírito Santo?'] || '').toLowerCase().includes('nao');
+            
+            // Selects
+            const grauInstrucao = document.getElementById('grau_instrucao');
+            if (grauInstrucao) {
+                const escolaridade = (membro['Escolaridade'] || '').toLowerCase();
+                if (escolaridade.includes('fundamental')) grauInstrucao.value = 'fundamental';
+                else if (escolaridade.includes('médio') || escolaridade.includes('medio')) grauInstrucao.value = 'medio';
+                else if (escolaridade.includes('superior')) grauInstrucao.value = 'superior';
+                else grauInstrucao.value = '';
             }
         }
 
-        // Função para marcar os botões de rádio baseados no valor
-        function marcarRadio(valor, nomeCampo) {
-            if (valor && valor.toLowerCase() === "sim") {
-                document.querySelector(`#${nomeCampo}_sim`).checked = true;
-            } else {
-                document.querySelector(`#${nomeCampo}_nao`).checked = true;
-            }
+        document.querySelectorAll('#funcionarioForm input, #funcionarioForm textarea').forEach(el => {
+        if (el.id !== 'selecionarMembro') {
+            el.classList.add('input-readonly');
         }
+    });
 
-        function limparCampos() {
-            const campos = document.querySelectorAll('input');
-            campos.forEach(campo => campo.value = '');
-            const radios = document.querySelectorAll('input[type="radio"]');
-            radios.forEach(radio => radio.checked = false);  // Limpa os botões de rádio
-        }
+        
+        // Adiciona event listeners quando o DOM estiver carregado
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('fileInput').addEventListener('change', carregarPlanilha);
+            document.getElementById('selecionarMembro').addEventListener('change', preencherCampos);
+        });
     </script>
 </body>
 </html>
