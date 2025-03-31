@@ -53,12 +53,7 @@
             <div class="instrucao-formacao">
                 <div class="field">
                     <label for="grau_instrucao">Grau de Instrução:</label>
-                    <select id="grau_instrucao">
-                        <option value="">Selecione</option>
-                        <option value="fundamental">Fundamental</option>
-                        <option value="medio">Médio</option>
-                        <option value="superior">Superior</option>
-                    </select>
+                    <input type="text" id="grau_instrucao">
                 </div>
                 <div class="field">
                     <label for="formacao">Formação:</label>
@@ -129,7 +124,7 @@
 
             <!-- Nome do Cônjuge -->
             <div class="field">
-                <label for="nome_conjuge" style="font-size: 14px; color: #333; margin-top: 10px;">SE CASADO:</label>
+                <label for="nome_conjuge" style="font-size: 14px; color: #333; margin-top: 10px;">Se Casado:</label>
                 <input type="text" id="nome_conjuge">
             </div>
 
@@ -140,7 +135,7 @@
                     <input type="text" id="data_casamento">
                 </div>
                 <div class="field">
-                    <label>Membro é casado?</label>
+                    <label>Cônjunge é membro?</label>
                     <div class="radio-group">
                         <div>
                             <input type="radio" id="membro_casado_sim" name="membro_casado" value="sim">
@@ -205,10 +200,7 @@
                             <input type="radio" id="whatsapp1_sim" name="whatsapp1" value="sim">
                             <label for="whatsapp1_sim">Sim</label>
                         </div>
-                        <div>
-                            <input type="radio" id="whatsapp1_nao" name="whatsapp1" value="nao">
-                            <label for="whatsapp1_nao">Não</label>
-                        </div>
+                        
                     </div>
                 </div>
                 <div class="field">
@@ -230,10 +222,7 @@
                             <input type="radio" id="whatsapp2_sim" name="whatsapp2" value="sim">
                             <label for="whatsapp2_sim">Sim</label>
                         </div>
-                        <div>
-                            <input type="radio" id="whatsapp2_nao" name="whatsapp2" value="nao">
-                            <label for="whatsapp2_nao">Não</label>
-                        </div>
+                        
                     </div>
                 </div>
                 <div class="field">
@@ -251,42 +240,42 @@
             <!-- Dependentes -->
             <div class="dependentes">
                 <div class="field">
-                    <label for="dependente1">Dependente 1:</label>
+                    <label for="dependente1">Nome do Dependente:</label>
                     <input type="text" id="dependente1">
                 </div>
                 <div class="field">
                     <label for="data_nascimento_dependente1">Data de Nascimento:</label>
-                    <input type="text" id="data_nascimento_dependente1">
+                    <input type="text_data" id="data_nascimento_dependente1">
                 </div>
             </div>
             <div class="dependentes">
                 <div class="field">
-                    <label for="dependente2">Dependente 2:</label>
+                    <label for="dependente2">Nome do Dependente:</label>
                     <input type="text" id="dependente2">
                 </div>
                 <div class="field">
                     <label for="data_nascimento_dependente2">Data de Nascimento:</label>
-                    <input type="text" id="data_nascimento_dependente2">
+                    <input type="text_data" id="data_nascimento_dependente2">
                 </div>
             </div>
             <div class="dependentes">
                 <div class="field">
-                    <label for="dependente3">Dependente 3:</label>
+                    <label for="dependente3">Nome do Dependente:</label>
                     <input type="text" id="dependente3">
                 </div>
                 <div class="field">
                     <label for="data_nascimento_dependente3">Data de Nascimento:</label>
-                    <input type="text" id="data_nascimento_dependente3">
+                    <input type="text_data" id="data_nascimento_dependente3">
                 </div>
             </div>
             <div class="dependentes">
                 <div class="field">
-                    <label for="dependente4">Dependente 4:</label>
+                    <label for="dependente4">Nome do Dependente:</label>
                     <input type="text" id="dependente4">
                 </div>
                 <div class="field">
                     <label for="data_nascimento_dependente4">Data de Nascimento:</label>
-                    <input type="text" id="data_nascimento_dependente4">
+                    <input type="text_data" id="data_nascimento_dependente4">
                 </div>
             </div>
 
@@ -306,8 +295,8 @@
                     </div>
                 </div>
                 <div class="field">
-                    <label for="data_conclusao_rhema">Data de Conclusão:</label>
-                    <input type="text" id="data_conclusao_rhema">
+                    <label for="data_conclusao_rhema">Ano de Conclusão do Rhema:</label>
+                    <input type="text_rhema" id="data_conclusao_rhema">
                 </div>
             </div>
             <div class="rhema-emr-ermm">
@@ -325,8 +314,8 @@
                     </div>
                 </div>
                 <div class="field">
-                    <label for="data_conclusao_emr">Data de Conclusão:</label>
-                    <input type="text" id="data_conclusao_emr">
+                    <label for="data_conclusao_emr">Ano de Conclusão da EMR:</label>
+                    <input type="text_rhema" id="data_conclusao_emr">
                 </div>
             </div>
             <div class="rhema-emr-ermm">
@@ -344,8 +333,8 @@
                     </div>
                 </div>
                 <div class="field">
-                    <label for="data_conclusao_ermm">Data de Conclusão:</label>
-                    <input type="text" id="data_conclusao_ermm">
+                    <label for="data_conclusao_ermm">Ano de Conclusão da ERMM:</label>
+                    <input type="text_rhema" id="data_conclusao_ermm">
                 </div>
             </div>
 
@@ -353,7 +342,7 @@
             <div class="batismo-espirito">
                 <div class="field">
                     <label for="data_novo_nascimento">Data do Novo Nascimento:</label>
-                    <input type="text" id="data_novo_nascimento">
+                    <input type="text_data" id="data_novo_nascimento">
                 </div>
                 <div class="field">
                     <label>Já recebeu o Espírito Santo?</label>
@@ -418,6 +407,23 @@
                 <textarea id="observacoes"></textarea>
             </div>
         </div>
+
+        <!-- Linha de assinatura -->
+    <!-- Adicione isto antes do </form> -->
+<div class="assinatura-container" style="margin: 60px 0 30px 0; text-align: center;">
+    <div style="margin-bottom: 45px; font-size: 14px;">
+        Confirmo que estes dados estão corretos
+    </div>
+    <div>
+
+    </div>
+    <div style="border-top: 1px solid #000; width: 300px; margin: 0 auto; padding-top: 5px;">
+        <!-- Aqui aparecerá o nome do membro -->
+        <div id="nome-assinatura" style="font-weight: bold; margin-top: 5px;"></div>
+    </div>
+    
+    
+</div>
     </form>
 
     <!-- Script de leitura do arquivo -->
@@ -488,6 +494,7 @@
             document.getElementById('nacionalidade').value = membro['Nacionalidade'] || '';
             document.getElementById('pais').value = membro['País'] || 'Brasil';
             document.getElementById('data_nascimento').value = membro['Data de Nascimento'] || '';
+            document.getElementById('grau_instrucao').value = membro['Escolaridade'] || '';
             document.getElementById('estado_civil').value = membro['Estado Civil'] || '';
             document.getElementById('nome_conjuge').value = membro['Nome do cônjuge'] || '';
             document.getElementById('data_casamento').value = membro['Data de Casamento'] || '';
@@ -543,26 +550,22 @@
                                                                  (membro['Já se batizou nas águas?'] || '').toLowerCase().includes('nao');
             
             document.getElementById('espirito_santo_sim').checked = (membro['Já recebeu o batismo no Espírito Santo?'] || '').toLowerCase().includes('sim');
-            document.getElementById('espirito_santo_nao').checked = (membro['Já recebeu o batismo no Espírito Santo?'] || '').toLowerCase().includes('não') || 
-                                                                  (membro['Já recebeu o batismo no Espírito Santo?'] || '').toLowerCase().includes('nao');
-                                                                  ocument.getElementById('espirito_santo_sim').checked = (membro['Já recebeu o batismo no Espírito Santo?'] || '').toLowerCase().includes('sim');
-            document.getElementById('aspersao').checked = (membro['Forma do batismo'] || '').toLowerCase().includes('Aspersão') || 
-                                                                  (membro['Forma do batismo'] || '').toLowerCase().includes('Aspersão');
+            document.getElementById('espirito_santo_nao').checked = (membro['Já recebeu o batismo no Espírito Santo?'] || '').toLowerCase().includes('não') || (membro['Já recebeu o batismo no Espírito Santo?'] || '').toLowerCase().includes('nao');
+           
+            document.getElementById('aspersao').checked = (membro['Forma do batismo'] || '').toLowerCase().includes('aspersão') || (membro['Forma do batismo'] || '').toLowerCase().includes('aspersão');
 
-            document.getElementById('imersao').checked = (membro['Forma do batismo'] || '').toLowerCase().includes('Imersão') || 
-                                                                  (membro['Forma do batismo'] || '').toLowerCase().includes('Imersão');
+            document.getElementById('imersao').checked = (membro['Forma do batismo'] || '').toLowerCase().includes('imersão') || (membro['Forma do batismo'] || '').toLowerCase().includes('imersão');
 
+             // Atualiza o nome na assinatura
+            
+                const nomeMembro = document.getElementById('nome').value;
+            document.getElementById('nome-assinatura').textContent = nomeMembro || '';
+            
 
+            
 
             // Selects
-            const grauInstrucao = document.getElementById('grau_instrucao');
-            if (grauInstrucao) {
-                const escolaridade = (membro['Escolaridade'] || '').toLowerCase();
-                if (escolaridade.includes('fundamental')) grauInstrucao.value = 'fundamental';
-                else if (escolaridade.includes('médio') || escolaridade.includes('medio')) grauInstrucao.value = 'medio';
-                else if (escolaridade.includes('superior')) grauInstrucao.value = 'superior';
-                else grauInstrucao.value = '';
-            }
+           
         }
 
         document.querySelectorAll('#funcionarioForm input, #funcionarioForm textarea').forEach(el => {
@@ -577,6 +580,29 @@
             document.getElementById('fileInput').addEventListener('change', carregarPlanilha);
             document.getElementById('selecionarMembro').addEventListener('change', preencherCampos);
         });
+
+
+         // Adiciona antes do fechamento </body>
+    window.onbeforeprint = function() {
+        document.body.style.margin = "0";
+        document.body.style.padding = "0";
+        document.body.style.transform = "scale(1)";
+        
+        // Cria um elemento temporário para forçar a limpeza
+        const cleanPrint = document.createElement('style');
+        cleanPrint.id = 'clean-print';
+        cleanPrint.innerHTML = `
+            @page { margin: 2mm; size: auto; }
+            body { margin: 10mm !important; }
+        `;
+        document.head.appendChild(cleanPrint);
+    };
+
+    window.onafterprint = function() {
+        // Remove o estilo após impressão
+        const style = document.getElementById('clean-print');
+        if (style) style.remove();
+    };
     </script>
 </body>
 </html>
