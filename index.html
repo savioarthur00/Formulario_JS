@@ -486,12 +486,13 @@
             document.getElementById('rg').value = membro['RG'] || '';
             document.getElementById('naturalidade').value = membro['Naturalidade'] || '';
             document.getElementById('nacionalidade').value = membro['Nacionalidade'] || '';
+            document.getElementById('pais').value = membro['País'] || 'Brasil';
             document.getElementById('data_nascimento').value = membro['Data de Nascimento'] || '';
             document.getElementById('estado_civil').value = membro['Estado Civil'] || '';
             document.getElementById('nome_conjuge').value = membro['Nome do cônjuge'] || '';
             document.getElementById('data_casamento').value = membro['Data de Casamento'] || '';
             document.getElementById('endereco').value = membro['Endereço'] || '';
-            document.getElementById('numero').value = membro['Numero'] || '';
+            document.getElementById('numero').value = membro['Número'] || '';
             document.getElementById('bairro').value = membro['Bairro'] || '';
             document.getElementById('cidade').value = membro['Cidade'] || '';
             document.getElementById('estado').value = membro['UF (Estado)'] || membro['UF'] || '';
@@ -544,7 +545,15 @@
             document.getElementById('espirito_santo_sim').checked = (membro['Já recebeu o batismo no Espírito Santo?'] || '').toLowerCase().includes('sim');
             document.getElementById('espirito_santo_nao').checked = (membro['Já recebeu o batismo no Espírito Santo?'] || '').toLowerCase().includes('não') || 
                                                                   (membro['Já recebeu o batismo no Espírito Santo?'] || '').toLowerCase().includes('nao');
-            
+                                                                  ocument.getElementById('espirito_santo_sim').checked = (membro['Já recebeu o batismo no Espírito Santo?'] || '').toLowerCase().includes('sim');
+            document.getElementById('aspersao').checked = (membro['Forma do batismo'] || '').toLowerCase().includes('Aspersão') || 
+                                                                  (membro['Forma do batismo'] || '').toLowerCase().includes('Aspersão');
+
+            document.getElementById('imersao').checked = (membro['Forma do batismo'] || '').toLowerCase().includes('Imersão') || 
+                                                                  (membro['Forma do batismo'] || '').toLowerCase().includes('Imersão');
+
+
+
             // Selects
             const grauInstrucao = document.getElementById('grau_instrucao');
             if (grauInstrucao) {
