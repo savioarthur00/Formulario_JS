@@ -55,7 +55,7 @@ textarea {
    
 }
 .input-readonly {
-    pointer-events: none;
+    
     background-color: #f5f5f5;
 }
 
