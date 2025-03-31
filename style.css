@@ -42,10 +42,37 @@ label {
     margin-bottom: 3px;
 }
 
-input[type="text"],
+
+input[type="text_data"],
 select,
 textarea {
-    width: 100%;
+    width: 60%;
+    height: 30px; /* Altura reduzida */
+    padding: 5px;
+    font-size: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+   
+}
+
+input[type="text_rhema"],
+select,
+textarea {
+    width: 20%;
+    height: 30px; /* Altura reduzida */
+    padding: 5px;
+    font-size: 12px;
+    padding-left: -30px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+   
+}
+
+input[type="text"],
+select {
+    width: 75%;
     height: 30px; /* Altura reduzida */
     padding: 5px;
     font-size: 12px;
@@ -55,12 +82,13 @@ textarea {
    
 }
 .input-readonly {
-    
+   
     background-color: #f5f5f5;
 }
 
 textarea {
-    height: 50px; /* Altura maior para o campo de observações */
+    height: 100px; /* Altura maior para o campo de observações */
+    width: 85%;
 }
 
 input[type="radio"] {
@@ -81,7 +109,11 @@ input[type="radio"] {
 #nome,
 #nome_conjuge,
 #endereco,
-#email,
+#email{
+    width: 86%; /* Margem reduzida */
+    margin: 0 10px;
+}
+
 #observacoes {
     width: calc(100% - 20px); /* Margem reduzida */
     margin: 0 10px;
@@ -121,6 +153,7 @@ input[type="radio"] {
     display: flex;
     gap: 10px;
     margin: 0 10px;
+    width: 91.5%;
 }
 
 .documentos .field {
@@ -154,6 +187,7 @@ input[type="radio"] {
     display: flex;
     gap: 10px;
     margin: 0 10px;
+    width: 80%;
 }
 
 .conjuge-casamento .field {
@@ -165,6 +199,7 @@ input[type="radio"] {
     display: flex;
     gap: 10px;
     margin: 0 10px;
+    width: 98.5%;
 }
 
 .endereco-cidade-bairro .field {
@@ -176,6 +211,7 @@ input[type="radio"] {
     display: flex;
     gap: 10px;
     margin: 0 10px;
+    width: 94%;
 }
 
 .numero-estado-pais-cep .field {
@@ -192,6 +228,7 @@ input[type="radio"] {
     display: flex;
     gap: 10px;
     margin: 0 10px;
+    width: 94%;
 }
 
 .telefone-operadora .field {
@@ -290,5 +327,43 @@ input[type="radio"] {
         border: 1px solid #ccc !important;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
+    }
+
+    @media print {
+        @page {
+            /* Mantém margens básicas mas remove cabeçalhos/rodapés */
+            margin: 10mm 10mm 10mm 10mm; /* Margens personalizadas (1.5cm cada lado) */
+            size: auto;
+            
+            /* Remove elementos do navegador */
+            marks: none;
+            margin-header: 10;
+            margin-footer: 10;
+            header: 2;
+            footer: 2;
+        }
+    
+        /* Remove elementos específicos do seu formulário */
+        #fileInput,
+        #selecionarMembro,
+        .no-print {
+            display: none !important;
+        }
+    
+        /* Mantém layout limpo */
+        body {
+            padding: 0 !important;
+            margin: 0 !important;
+            background: white !important;
+            color: black !important;
+        }
+    
+        /* Garante que os campos apareçam corretamente */
+        input, textarea, select {
+            border: 1px solid #ccc !important;
+            background: transparent !important;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
     }
 }
