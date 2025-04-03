@@ -493,11 +493,11 @@
             document.getElementById('naturalidade').value = membro['Naturalidade'] || '';
             document.getElementById('nacionalidade').value = membro['Nacionalidade'] || '';
             document.getElementById('pais').value = membro['País'] || 'Brasil';
-            document.getElementById('data_nascimento').value = membro['Data de Nascimento'] || '';
+            document.getElementById('data_nascimento').value = formatarData(membro['Data de Nascimento'] || '');
             document.getElementById('grau_instrucao').value = membro['Escolaridade'] || '';
             document.getElementById('estado_civil').value = membro['Estado Civil'] || '';
             document.getElementById('nome_conjuge').value = membro['Nome do cônjuge'] || '';
-            document.getElementById('data_casamento').value = membro['Data de Casamento'] || '';
+            document.getElementById('data_casamento').value = formatarData(membro['Data de Casamento'] || '');
             document.getElementById('endereco').value = membro['Endereço'] || '';
             document.getElementById('numero').value = membro['Número'] || '';
             document.getElementById('bairro').value = membro['Bairro'] || '';
@@ -512,11 +512,11 @@
             document.getElementById('dependente2').value = membro['Dependente 2 - Nome'] || '';
             document.getElementById('dependente3').value = membro['Dependente 3 - Nome'] || '';
             document.getElementById('dependente4').value = membro['Dependente 4 - Nome'] || '';
-            document.getElementById('data_nascimento_dependente1').value = membro['Dependente 1 - Data de Nascimento'] || '';
-            document.getElementById('data_nascimento_dependente2').value = membro['Dependente 2 - Data de Nascimento'] || '';
-            document.getElementById('data_nascimento_dependente3').value = membro['Dependente 3 - Data de Nascimento'] || '';
-            document.getElementById('data_nascimento_dependente4').value = membro['Dependente 4 - Data de Nascimento'] || '';
-            document.getElementById('data_novo_nascimento').value = membro['Data do novo nascimento'] || '';
+            document.getElementById('data_nascimento_dependente1').value = formatarData(membro['Dependente 1 - Data de Nascimento'] || '');
+            document.getElementById('data_nascimento_dependente2').value = formatarData(membro['Dependente 2 - Data de Nascimento'] || '');
+            document.getElementById('data_nascimento_dependente3').value = formatarData(membro['Dependente 3 - Data de Nascimento'] || '');
+            document.getElementById('data_nascimento_dependente4').value = formatarData(membro['Dependente 4 - Data de Nascimento'] || '');
+            document.getElementById('data_novo_nascimento').value = formatarData(membro['Data do novo nascimento'] || '');
             document.getElementById('facebook').value = membro['Facebook'] || '';
             document.getElementById('instagram').value = membro['Instagram'] || '';
             document.getElementById('observacoes').value = membro['Observações Finais'] || '';
@@ -603,6 +603,25 @@
         const style = document.getElementById('clean-print');
         if (style) style.remove();
     };
+
+
+    function formatarData(data) {
+    if (!data) return '';
+    
+    // Verifica se a data está no formato YYYY-MM-DD ou semelhante
+    const partes = data.split('-'); 
+    if (partes.length === 3) {
+        return `${partes[2]}/${partes[1]}/${partes[0]}`; // Reorganiza para DD/MM/YYYY
+    }
+
+    // Verifica se a data está no formato MM/DD/YYYY (formato americano comum no Excel)
+    const partesUS = data.split('/');
+    if (partesUS.length === 3 && partesUS[2].length === 4) {
+        return `${partesUS[1]}/${partesUS[0]}/${partesUS[2]}`; // Converte para DD/MM/YYYY
+    }
+
+    return data; // Retorna sem alterar se não for possível formatar
+}
     </script>
 </body>
 </html>
