@@ -5,6 +5,14 @@
     box-sizing: border-box;
     font-family: Arial, sans-serif;
 }
+.title {
+    background-color: #3498db; /* Azul */
+    color: white; /* Letra branca */
+    border-radius: 10px; /* Bordas arredondadas - ajuste o valor para mudar o grau */
+    font-size: 12px; /* Tamanho da fonte */
+    padding: 8px 12px; /* Espaçamento interno para melhor visualização */
+    display: inline-block; /* Para o fundo cobrir apenas o conteúdo */
+}
 
 body {
     padding: 10px;
