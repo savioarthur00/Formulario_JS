@@ -477,6 +477,20 @@
             
             reader.readAsArrayBuffer(file);
         }
+       function formatarData(data) {
+                    if (!data) return '';
+                
+                    const dt = new Date(data);
+                    if (isNaN(dt.getTime())) return data; // Retorna a data original se não for válida
+                
+                    // Formata para DD/MM/YYYY
+                    const dia = String(dt.getDate()).padStart(2, '0');
+                    const mes = String(dt.getMonth() + 1).padStart(2, '0'); // Mês começa em 0 no JS
+                    const ano = dt.getFullYear();
+                
+                    return `${dia}/${mes}/${ano}`;
+        }
+
        
         function preencherCampos() {
             const selectedIndex = document.getElementById('selecionarMembro').value;
@@ -605,23 +619,7 @@
     };
 
 
-    function formatarData(data) {
-    if (!data) return '';
     
-    // Verifica se a data está no formato YYYY-MM-DD ou semelhante
-    const partes = data.split('-'); 
-    if (partes.length === 3) {
-        return `${partes[2]}/${partes[1]}/${partes[0]}`; // Reorganiza para DD/MM/YYYY
-    }
-
-    // Verifica se a data está no formato MM/DD/YYYY (formato americano comum no Excel)
-    const partesUS = data.split('/');
-    if (partesUS.length === 3 && partesUS[2].length === 4) {
-        return `${partesUS[1]}/${partesUS[0]}/${partesUS[2]}`; // Converte para DD/MM/YYYY
-    }
-
-    return data; // Retorna sem alterar se não for possível formatar
-}
     </script>
 </body>
 </html>
