@@ -20,7 +20,7 @@ body {
 }
 
 /* Título do formulário */
-h1 {
+body h1 {
     background-color: #3498db !important;
     color: white; /* Letra branca */
     border-radius: 10px; /* Bordas arredondadas - ajuste o valor para mudar o grau */
