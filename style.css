@@ -1,11 +1,10 @@
-  /* Reset básico */
-  * {
+/* Reset básico */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: Arial, sans-serif;
 }
-
 
 body {
     padding: 10px;
@@ -15,21 +14,21 @@ body {
 /* Logo centralizado */
 .top-image {
     display: block;
-    margin: 0 auto 10px auto;
+    margin: 0 auto;
     max-width: 150px;
 }
 
-/* Título do formulário */
- h1 {
-    background-color: #3498db !important;
-    color: white; /* Letra branca */
-    border-radius: 10px; /* Bordas arredondadas - ajuste o valor para mudar o grau */
-    font-size: 12px; /* Tamanho da fonte */
-    padding: 8px 12px; /* Espaçamento interno para melhor visualização */
-    display: inline-block; /* Para o fundo cobrir apenas o conteúdo */
+/* Título do formulário - NOVO ESTILO (centralizado e azul) */
+.form-title {
+    background-color: #3498db;
+    color: white;
+    border-radius: 10px;
+    font-size: 14px;
+    padding: 8px 12px;
+    display: block;
     text-align: center;
-    margin-bottom: 15px;
-  
+    margin: 10px auto 15px auto;
+    width: fit-content;
 }
 
 /* Estilo dos campos e labels */
@@ -48,52 +47,48 @@ label {
     margin-bottom: 3px;
 }
 
-
 input[type="text_data"],
 select,
 textarea {
     width: 60%;
-    height: 30px; /* Altura reduzida */
+    height: 30px;
     padding: 5px;
     font-size: 12px;
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #fff;
-   
 }
 
 input[type="text_rhema"],
 select,
 textarea {
     width: 20%;
-    height: 30px; /* Altura reduzida */
+    height: 30px;
     padding: 5px;
     font-size: 12px;
     padding-left: -30px;
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #fff;
-   
 }
 
 input[type="text"],
 select {
     width: 75%;
-    height: 30px; /* Altura reduzida */
+    height: 30px;
     padding: 5px;
     font-size: 12px;
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #fff;
-   
 }
+
 .input-readonly {
-   
     background-color: #f5f5f5;
 }
 
 textarea {
-    height: 100px; /* Altura maior para o campo de observações */
+    height: 100px;
     width: 85%;
 }
 
@@ -115,13 +110,13 @@ input[type="radio"] {
 #nome,
 #nome_conjuge,
 #endereco,
-#email{
-    width: 86%; /* Margem reduzida */
+#email {
+    width: 86%;
     margin: 0 10px;
 }
 
 #observacoes {
-    width: calc(100% - 20px); /* Margem reduzida */
+    width: calc(100% - 20px);
     margin: 0 10px;
 }
 
@@ -226,7 +221,7 @@ input[type="radio"] {
 
 .numero-estado-pais-cep .field:nth-child(1),
 .numero-estado-pais-cep .field:nth-child(2) {
-    flex: 0.5; /* Campos menores para Número e Estado */
+    flex: 0.5;
 }
 
 /* Campos de Telefone e Operadora */
@@ -242,15 +237,15 @@ input[type="radio"] {
 }
 
 .telefone-operadora .field:nth-child(1) {
-    flex: 1.5; /* Campo maior para Telefone */
+    flex: 1.5;
 }
 
 .telefone-operadora .field:nth-child(2) {
-    flex: 0.5; /* Campo menor para WhatsApp */
+    flex: 0.5;
 }
 
 .telefone-operadora .field:nth-child(3) {
-    flex: 1; /* Campo para Operadora */
+    flex: 1;
 }
 
 /* Campos de Dependentes */
@@ -278,98 +273,4 @@ input[type="radio"] {
 /* Campos de Batismo e Espírito Santo */
 .batismo-espirito {
     display: flex;
-    gap: 10px;
-    margin: 0 10px;
-}
-
-.batismo-espirito .field {
-    flex: 1;
-}
-
-/* Campos de Redes Sociais */
-.redes-sociais {
-    display: flex;
-    gap: 10px;
-    margin: 0 10px;
-}
-
-.redes-sociais .field {
-    flex: 1;
-}
-
-/* Estilo para rádios lado a lado */
-.radio-group {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-/* No final do seu arquivo CSS, adicione: */
-@media print {
-    /* Oculta o input de arquivo e o seletor de membros */
-    #fileInput,
-    #selecionarMembro,
-    .field > label[for="selecionarMembro"] {
-        display: none !important;
-    }
-    
-    /* Garante que o formulário ocupe toda a largura */
-    #funcionarioForm {
-        width: 100%;
-        margin: 0;
-        padding: 0;
-    }
-    
-    /* Melhora a legibilidade na impressão */
-    body {
-        background-color: white;
-        font-size: 12pt;
-        padding: 0;
-        margin: 0;
-    }
-    
-    /* Remove fundos desnecessários */
-    input, select, textarea {
-        background-color: transparent !important;
-        border: 1px solid #ccc !important;
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-    }
-
-    @media print {
-        @page {
-            /* Mantém margens básicas mas remove cabeçalhos/rodapés */
-            margin: 10mm 10mm 10mm 10mm; /* Margens personalizadas (1.5cm cada lado) */
-            size: auto;
-            
-            /* Remove elementos do navegador */
-            marks: none;
-            margin-header: 10;
-            margin-footer: 10;
-            header: 2;
-            footer: 2;
-        }
-    
-        /* Remove elementos específicos do seu formulário */
-        #fileInput,
-        #selecionarMembro,
-        .no-print {
-            display: none !important;
-        }
-    
-        /* Mantém layout limpo */
-        body {
-            padding: 0 !important;
-            margin: 0 !important;
-            background: white !important;
-            color: black !important;
-        }
-    
-        /* Garante que os campos apareçam corretamente */
-        input, textarea, select {
-            border: 1px solid #ccc !important;
-            background: transparent !important;
-            -webkit-print-color-adjust: exact;
-            print-color-adjust: exact;
-        }
-    }
-}
+    gap: 10
