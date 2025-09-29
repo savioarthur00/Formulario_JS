@@ -5,12 +5,7 @@
      font-family: Arial, sans-serif;
  }
  .title {
-     background-color: #3498db; /* Azul */
-     color: white; /* Letra branca */
-     border-radius: 10px; /* Bordas arredondadas - ajuste o valor para mudar o grau */
-     font-size: 12px; /* Tamanho da fonte */
-     padding: 8px 12px; /* Espaçamento interno para melhor visualização */
-     display: inline-block; /* Para o fundo cobrir apenas o conteúdo */
+     
  }
  
  body {
@@ -27,14 +22,14 @@
  
  /* Título do formulário */
  h1 {
+      text-align: center;
       background-color: #3498db; /* Azul */
-     color: white; /* Letra branca */
-     border-radius: 10px; /* Bordas arredondadas - ajuste o valor para mudar o grau */
-     font-size: 12px; /* Tamanho da fonte */
-     padding: 8px 12px; /* Espaçamento interno para melhor visualização */
-     display: inline-block; /* Para o fundo cobrir apenas o conteúdo */
-     text-align: center;
-     margin-bottom: 15px;
+      color: white; /* Letra branca */
+      border-radius: 10px; /* Bordas arredondadas - ajuste o valor para mudar o grau */
+      font-size: 12px; /* Tamanho da fonte */
+      padding: 8px 12px; /* Espaçamento interno para melhor visualização */
+      display: inline-block; /* Para o fundo cobrir apenas o conteúdo */
+      margin-bottom: 15px;
      
  }
  
@@ -379,4 +374,5 @@
          }
      }
  }
+
 
