@@ -29,7 +29,7 @@
       font-size: 12px; /* Tamanho da fonte */
       padding: 8px 12px; /* Espaçamento interno para melhor visualização */
       display: inline-block; /* Para o fundo cobrir apenas o conteúdo */
-      margin-bottom: 15px;
+      margin-bottom: 150px;
      
  }
  
@@ -374,5 +374,6 @@
          }
      }
  }
+
 
 
