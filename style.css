@@ -30,9 +30,9 @@
       padding: 8px 12px; /* Espaçamento interno para melhor visualização */
       display: inline-block; /* Para o fundo cobrir apenas o conteúdo */
       margin-bottom: 150px;
-      display: inline-block;
-      margin: 0 auto 100px auto;
-      max-width: 150px;
+      display: block;
+      margin: 0 100px 100px 100px;
+      max-width: 650px;
      
  }
  
@@ -377,6 +377,7 @@
          }
      }
  }
+
 
 
 
