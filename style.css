@@ -5,7 +5,7 @@
      font-family: Arial, sans-serif;
  }
  .title {
-     
+     text-align: center;
  }
  
  body {
@@ -30,6 +30,9 @@
       padding: 8px 12px; /* Espaçamento interno para melhor visualização */
       display: inline-block; /* Para o fundo cobrir apenas o conteúdo */
       margin-bottom: 150px;
+      display: block;
+      margin: 0 auto 10px auto;
+      max-width: 150px;
      
  }
  
@@ -374,6 +377,7 @@
          }
      }
  }
+
 
 
 
